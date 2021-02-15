@@ -1,6 +1,12 @@
 import { Grid2D } from './Grid2D.js'
 
 export function createHeatMap(events) {
+  const visitCounts = determineVisitCounts(events)
+  const colorIntensities = generateColorIntensities(visitCounts)
+  return colorIntensities
+}
+
+function determineVisitCounts(events) {
   const width = window.innerWidth
   const height = window.innerHeight
   const visitCounts = new Grid2D(width, height)
@@ -9,8 +15,7 @@ export function createHeatMap(events) {
     const coordinates = {x: event.clientX, y: event.clientY}
     visitCounts.set(coordinates, visitCounts.get(coordinates) + 1)
   }
-  const colorIntensities = generateColorIntensities(visitCounts)
-  return colorIntensities
+  return visitCounts
 }
 
 function initializeGrid(grid) {
