@@ -42,7 +42,7 @@ function getMax(grid) {
   let max = null
   for (const {x, y} of grid.positions()) {
     const value = grid.get({x, y})
-    if (max === null || value > max) {
+    if (value > max || max === null) {
       max = value
     }
   }
